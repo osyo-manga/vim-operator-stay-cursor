@@ -37,13 +37,26 @@ operator 実行時にカーソルを移動しないようにするための oper
 ------------------------------------------------------------------------------
 関数						*operator-stay-cursor-functions*
 
-operator#stay_cursor#wrapper({operator})		*operator#stay_cursor#wrapper()*
+operator#stay_cursor#wrapper({operator})	*operator#stay_cursor#wrapper()*
 	{operator} 実行時にカーソルを移動させないような operator
 	の呼び出しを行ないます。
 	この関数はキーマッピング <expr> に対して設定して使用します。
 Example: >
 	map <expr> c operator#stay_cursor#wrapper("c")
 <
+
+------------------------------------------------------------------------------
+キーマッピング				*operator-stay-cursor-keymapping*
+
+<Plug>(operator-stay-cursor-yank)	*<Plug>(operator-stay-cursor-yank)*
+	|y| オペレータを呼び出します。
+
+<Plug>(operator-stay-cursor-delete)	*<Plug>(operator-stay-cursor-delete)*
+	|d| オペレータを呼び出します。
+
+<Plug>(operator-stay-cursor-change)	*<Plug>(operator-stay-cursor-change)*
+	|c| オペレータを呼び出します。
+
 
 ==============================================================================
 vim:tw=78:fo=tcq2mM:ts=8:ft=help:norl
