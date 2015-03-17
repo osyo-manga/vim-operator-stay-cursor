@@ -57,6 +57,15 @@ Example: >
 <Plug>(operator-stay-cursor-change)	*<Plug>(operator-stay-cursor-change)*
 	|c| オペレータを呼び出します。
 
+<Plug>(operator-stay-cursor-gu)		*<Plug>(operator-stay-cursor-gu)*
+	|gu| オペレータを呼び出します。
+
+<Plug>(operator-stay-cursor-gU)		*<Plug>(operator-stay-cursor-gU)*
+	|gU| オペレータを呼び出します。
+
+<Plug>(operator-stay-cursor-g~)		*<Plug>(operator-stay-cursor-g~)*
+	|g~| オペレータを呼び出します。
+
 
 ==============================================================================
 vim:tw=78:fo=tcq2mM:ts=8:ft=help:norl
