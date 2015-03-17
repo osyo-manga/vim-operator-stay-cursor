@@ -1,0 +1,49 @@
+*operator-stay-cursor.txt*	operator 実行時にカーソルを移動しないようにする
+
+==============================================================================
+目次						*operator-stay-cursor-contents*
+
+概要				|operator-stay-cursor-introduction|
+使用例				|operator-stay-cursor-example|
+インターフェース		|operator-stay-cursor-interface|
+  関数				  |operator-stay-cursor-functions|
+
+
+
+==============================================================================
+概要						*operator-stay-cursor-introduction*
+
+operator 実行時にカーソルを移動しないようにするための operator です。
+
+- Requires
+  operator-user - https://github.com/kana/vim-operator-user
+
+
+==============================================================================
+使用例				*operator-stay-cursor-example*
+
+>
+	" ヤンク時に operator を移動しないようにする
+	map y <Plug>(operator-stay-cursor-yank)
+
+	" 任意の operator に対して移動しないようにさせる
+	map <expr> c operator#stay_cursor#wrapper("c")
+<
+
+
+==============================================================================
+インターフェース				*operator-stay-cursor-interface*
+
+------------------------------------------------------------------------------
+関数						*operator-stay-cursor-functions*
+
+operator#stay_cursor#wrapper({operator})		*operator#stay_cursor#wrapper()*
+	{operator} 実行時にカーソルを移動させないような operator
+	の呼び出しを行ないます。
+	この関数はキーマッピング <expr> に対して設定して使用します。
+Example: >
+	map <expr> c operator#stay_cursor#wrapper("c")
+<
+
+==============================================================================
+vim:tw=78:fo=tcq2mM:ts=8:ft=help:norl
