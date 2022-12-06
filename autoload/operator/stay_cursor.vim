@@ -17,7 +17,7 @@ let s:default_config = {
 \}
 
 
-function! s:do(wise, op, pos, config)
+function! s:do(wise, op, view, config)
 	let old_selection = &selection
 	let &selection = 'inclusive'
 	let wise = s:as_wise_key(a:wise)
@@ -30,20 +30,20 @@ function! s:do(wise, op, pos, config)
 	finally
 		let &selection = old_selection
 	endtry
-	call setpos(".", a:pos)
+	call winrestview(a:view)
 endfunction
 
 
 function! operator#stay_cursor#wrapper(op, ...)
 	let s:config = extend(copy(s:default_config), get(a:, 1, {}))
-	let s:pos = getpos(".")
+	let s:view = winsaveview()
 	let s:operator = a:op
 	return "\<Plug>(operator-operator-stay-cursor-dummy)"
 endfunction
 
 
 function! operator#stay_cursor#do(wise)
-	return s:do(a:wise, s:operator, s:pos, s:config)
+	return s:do(a:wise, s:operator, s:view, s:config)
 endfunction
 
 call operator#user#define('operator-stay-cursor-dummy', 'operator#stay_cursor#do')
