@@ -23,9 +23,9 @@ function! s:do(wise, op, view, config)
 	let wise = s:as_wise_key(a:wise)
 	try
 		if a:config.noremap
-			execute printf('silent normal! `[%s`]%s', wise, a:op)
+			execute printf('silent normal! `[%s`]"%s%s', wise, s:register, a:op)
 		else
-			execute printf('silent normal `[%s`]%s', wise, a:op)
+			execute printf('silent normal `[%s`]"%s%s', wise, s:register, a:op)
 		endif
 	finally
 		let &selection = old_selection
@@ -35,6 +35,7 @@ endfunction
 
 
 function! operator#stay_cursor#wrapper(op, ...)
+	let s:register = v:register
 	let s:config = extend(copy(s:default_config), get(a:, 1, {}))
 	let s:view = winsaveview()
 	let s:operator = a:op
