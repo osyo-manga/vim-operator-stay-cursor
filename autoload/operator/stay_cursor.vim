@@ -18,6 +18,7 @@ let s:default_config = {
 
 
 function! s:do(wise, op, view, config)
+	let mode = mode()
 	let old_selection = &selection
 	let &selection = 'inclusive'
 	let wise = s:as_wise_key(a:wise)
@@ -30,7 +31,10 @@ function! s:do(wise, op, view, config)
 	finally
 		let &selection = old_selection
 	endtry
-	call winrestview(a:view)
+	" No cursor movement if not selected.
+	if mode =~# '^[vV\x16]'
+		call winrestview(a:view)
+	endif
 endfunction
 
 
