@@ -17,8 +17,7 @@ let s:default_config = {
 \}
 
 
-function! s:do(wise, op, view, config)
-	let mode = mode()
+function! s:do(wise, op, config)
 	let old_selection = &selection
 	let &selection = 'inclusive'
 	let wise = s:as_wise_key(a:wise)
@@ -31,10 +30,9 @@ function! s:do(wise, op, view, config)
 	finally
 		let &selection = old_selection
 	endtry
-	" No cursor movement if not selected.
-	if mode =~# '^[vV\x16]'
-		call winrestview(a:view)
-	endif
+	call winrestview(s:view)
+	" No cursor movement when dot repeat.
+	let s:view = {}
 endfunction
 
 
@@ -48,7 +46,7 @@ endfunction
 
 
 function! operator#stay_cursor#do(wise)
-	return s:do(a:wise, s:operator, s:view, s:config)
+	return s:do(a:wise, s:operator, s:config)
 endfunction
 
 call operator#user#define('operator-stay-cursor-dummy', 'operator#stay_cursor#do')
